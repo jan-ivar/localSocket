@@ -11,6 +11,7 @@ function localSocket() {
     if (this.onmessage) this.onmessage({ data: arr[this.index] });
     this.index++;
   }, 200);
+  setTimeout(() => this.onopen && this.onopen({}));
 }
 localSocket.prototype = {
   send: function(msg) {
