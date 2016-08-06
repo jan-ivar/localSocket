@@ -8,7 +8,7 @@ function localSocket() {
     }
     var arr = JSON.parse(localStorage[this.in]);
     if (arr.length <= this.index) return;
-    if (this.onmessage) this.onmessage({ data: arr[this.index] });
+    if (this.onmessage) this.onmessage({ data: JSON.parse(arr[this.index]) });
     this.index++;
   }, 200);
   setTimeout(() => this.onopen && this.onopen({}));
@@ -19,7 +19,7 @@ localSocket.prototype = {
       this.out = "a"; this.in = "b";
     }
     var arr = JSON.parse(localStorage[this.out]);
-    arr.push(msg);
+    arr.push(JSON.stringify(msg));
     localStorage[this.out] = JSON.stringify(arr);
   },
   close: function() {
